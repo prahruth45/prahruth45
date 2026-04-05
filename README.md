@@ -322,42 +322,4 @@ class Prahruth:
 </div>
 **prahruth45/prahruth45** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
-
-name: 🐍 Generate Snake Animation
-
-on:
-  # Runs every day at midnight UTC — keeps snake fresh daily
-  schedule:
-    - cron: "0 0 * * *"
-
-  # Also runs on every push to main/master
-  push:
-    branches:
-      - main
-      - master
-
-  # Allows manual trigger from the Actions tab
-  workflow_dispatch:
-
-jobs:
-  generate:
-    name: Generate contribution snake
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-      - name: Generate Snake SVGs
-        uses: Platane/snk@v3
-        with:
-          github_user_token: ${{ secrets.GITHUB_TOKEN }}
-          outputs: |
-            dist/github-contribution-grid-snake.svg
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-
-      - name: Push SVGs to output branch
-        uses: crazy-max/ghaction-github-pages@v3
-        with:
-          target_branch: output
-          build_dir: dist
-        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
